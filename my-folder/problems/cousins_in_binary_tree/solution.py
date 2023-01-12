@@ -6,17 +6,26 @@
 #         self.right = right
 class Solution:
     def isCousins(self, root: Optional[TreeNode], x: int, y: int) -> bool:
-        q=list()
-        res=list()
-        q.append([root,TreeNode(0),0])
+        q=[root]
+        ans=list()
         while q:
-            if len(res)==2:
-                break
-            node, parent, depth=q.pop()
-            if node and (node.val==x or node.val==y):
-                res.append([parent, depth])
-            if node:
-                q.append([node.left,node,depth+1])
-                q.append([node.right,node,depth+1])
-        
-        return res[0][0]!=res[1][0] and res[0][1]==res[1][1]
+            level=list()
+            for z in range(0,len(q)):
+                root=q.pop(0)
+                level.append(root.val)
+                if root.left and root.right:
+                    if root.left.val == x and root.right.val==y:
+                        return False
+                    if root.right.val == x and root.left.val==y:
+                        return False
+                if root:
+                    if root.left:
+                        q.append(root.left)
+                    if root.right:
+                        q.append(root.right)
+            ans.append(level)
+            flag=False
+        for z in range(0,len(ans)):
+            if x in ans[z] and y in ans[z]:
+                flag=True
+        return flag
