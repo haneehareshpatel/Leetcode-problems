@@ -1,7 +1,10 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
-        ans=[0,1,2]
-        for x in range(3,n+1):
-            t=ans[x-1]+ans[x-2]
-            ans.append(t)
-        return ans[n]
+        dp = [-1]*(n+1)
+        if n>0:
+            dp[1]=1
+        if n>1:
+            dp[2]=2
+        for i in range(3,n+1):
+            dp[i]=dp[i-1]+dp[i-2]
+        return dp[-1]
