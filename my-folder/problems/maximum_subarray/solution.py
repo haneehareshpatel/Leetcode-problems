@@ -1,8 +1,8 @@
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        max_sum = nums[0]
-        curr_sum = 0
-        for x in range(0,len(nums)):
-            curr_sum = max(curr_sum+nums[x], nums[x])
-            max_sum = max(curr_sum,max_sum)
-        return max_sum
+        curr_sum = nums[0]
+        ans = nums[0]
+        for i in range(1, len(nums)):
+            curr_sum = max(curr_sum + nums[i], nums[i])
+            ans = max(ans, curr_sum)
+        return ans
